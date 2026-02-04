@@ -2,7 +2,7 @@ using MiniMarket.Domain.Entities;
 
 namespace MiniMarket.Domain.Ports.Output;
 
-public interface IAuditLogRepository : IRepository<AuditLog>
+public interface IAuditLogRepository : IRepository<AuditLog, Guid>
 {
     Task<IReadOnlyList<AuditLog>> GetByEntityAsync(string entityType, Guid entityId);
     Task<IReadOnlyList<AuditLog>> GetByUserAsync(Guid userId, int count = 50);

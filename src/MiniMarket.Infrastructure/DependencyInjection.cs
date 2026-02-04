@@ -34,6 +34,7 @@ public static class DependencyInjection
         // Stage 5 - Polish
         services.AddScoped<IAlertRepository, AlertRepository>();
         services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+        services.AddScoped<MiniMarket.Application.Services.IBackupService, BackupService>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

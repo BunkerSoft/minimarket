@@ -1,16 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MiniMarket.Application.Common;
+using MiniMarket.Application.Services;
+using MiniMarket.Infrastructure.Data;
 
-namespace MiniMarket.Application.Services;
+namespace MiniMarket.Infrastructure;
 
 public class BackupService : IBackupService
 {
-    private readonly DbContext _dbContext;
+    private readonly MiniMarketDbContext _dbContext;
     private readonly string _backupPath;
     private readonly string _databaseName;
 
-    public BackupService(DbContext dbContext, IConfiguration configuration)
+    public BackupService(MiniMarketDbContext dbContext, IConfiguration configuration)
     {
         _dbContext = dbContext;
         _backupPath = configuration["Backup:Path"] ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Backups");

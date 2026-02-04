@@ -3,7 +3,7 @@ using MiniMarket.Domain.Enums;
 
 namespace MiniMarket.Domain.Entities;
 
-public class Alert : BaseEntity
+public class Alert : AggregateRoot<Guid>
 {
     public AlertType Type { get; private set; }
     public AlertSeverity Severity { get; private set; }
@@ -17,7 +17,7 @@ public class Alert : BaseEntity
     public User? AcknowledgedByUser { get; private set; }
     public DateTime? ResolvedAt { get; private set; }
 
-    private Alert() { }
+    private Alert() : base() { }
 
     public static Alert Create(
         AlertType type,
@@ -27,7 +27,7 @@ public class Alert : BaseEntity
         string? entityType = null,
         Guid? entityId = null)
     {
-        return new Alert
+        var alert = new Alert
         {
             Id = Guid.NewGuid(),
             Type = type,
@@ -36,9 +36,9 @@ public class Alert : BaseEntity
             Title = title,
             Message = message,
             EntityType = entityType,
-            EntityId = entityId,
-            CreatedAt = DateTime.UtcNow
+            EntityId = entityId
         };
+        return alert;
     }
 
     public void Acknowledge(Guid userId)
@@ -49,7 +49,7 @@ public class Alert : BaseEntity
         Status = AlertStatus.Acknowledged;
         AcknowledgedAt = DateTime.UtcNow;
         AcknowledgedByUserId = userId;
-        UpdatedAt = DateTime.UtcNow;
+        SetUpdated();
     }
 
     public void Resolve()
@@ -59,7 +59,7 @@ public class Alert : BaseEntity
 
         Status = AlertStatus.Resolved;
         ResolvedAt = DateTime.UtcNow;
-        UpdatedAt = DateTime.UtcNow;
+        SetUpdated();
     }
 
     public void Dismiss(Guid userId)
@@ -70,6 +70,6 @@ public class Alert : BaseEntity
         Status = AlertStatus.Dismissed;
         AcknowledgedAt = DateTime.UtcNow;
         AcknowledgedByUserId = userId;
-        UpdatedAt = DateTime.UtcNow;
+        SetUpdated();
     }
 }

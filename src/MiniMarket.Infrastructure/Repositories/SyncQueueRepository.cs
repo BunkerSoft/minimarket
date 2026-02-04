@@ -6,46 +6,15 @@ using MiniMarket.Infrastructure.Data;
 
 namespace MiniMarket.Infrastructure.Repositories;
 
-public class SyncQueueRepository : ISyncQueueRepository
+public class SyncQueueRepository : RepositoryBase<SyncQueueItem, Guid>, ISyncQueueRepository
 {
-    private readonly MiniMarketDbContext _context;
-
-    public SyncQueueRepository(MiniMarketDbContext context)
+    public SyncQueueRepository(MiniMarketDbContext context) : base(context)
     {
-        _context = context;
-    }
-
-    public async Task<SyncQueueItem?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        return await _context.SyncQueue
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-    }
-
-    public async Task<IReadOnlyList<SyncQueueItem>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        return await _context.SyncQueue
-            .OrderBy(x => x.CreatedAt)
-            .ToListAsync(cancellationToken);
-    }
-
-    public async Task AddAsync(SyncQueueItem entity, CancellationToken cancellationToken = default)
-    {
-        await _context.SyncQueue.AddAsync(entity, cancellationToken);
-    }
-
-    public void Update(SyncQueueItem entity)
-    {
-        _context.SyncQueue.Update(entity);
-    }
-
-    public void Remove(SyncQueueItem entity)
-    {
-        _context.SyncQueue.Remove(entity);
     }
 
     public async Task<IReadOnlyList<SyncQueueItem>> GetPendingAsync(int limit = 100, CancellationToken cancellationToken = default)
     {
-        return await _context.SyncQueue
+        return await DbSet
             .Where(x => x.Status == SyncStatus.Pending)
             .OrderBy(x => x.CreatedAt)
             .Take(limit)
@@ -54,7 +23,7 @@ public class SyncQueueRepository : ISyncQueueRepository
 
     public async Task<IReadOnlyList<SyncQueueItem>> GetFailedAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.SyncQueue
+        return await DbSet
             .Where(x => x.Status == SyncStatus.Failed)
             .OrderBy(x => x.CreatedAt)
             .ToListAsync(cancellationToken);
@@ -62,7 +31,7 @@ public class SyncQueueRepository : ISyncQueueRepository
 
     public async Task<IReadOnlyList<SyncQueueItem>> GetByEntityAsync(string entityType, Guid entityId, CancellationToken cancellationToken = default)
     {
-        return await _context.SyncQueue
+        return await DbSet
             .Where(x => x.EntityType == entityType && x.EntityId == entityId)
             .OrderByDescending(x => x.CreatedAt)
             .ToListAsync(cancellationToken);
@@ -70,13 +39,13 @@ public class SyncQueueRepository : ISyncQueueRepository
 
     public async Task<SyncQueueItem?> GetBySyncIdAsync(Guid syncId, CancellationToken cancellationToken = default)
     {
-        return await _context.SyncQueue
+        return await DbSet
             .FirstOrDefaultAsync(x => x.SyncId == syncId, cancellationToken);
     }
 
     public async Task<int> GetPendingCountAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.SyncQueue
+        return await DbSet
             .CountAsync(x => x.Status == SyncStatus.Pending, cancellationToken);
     }
 
@@ -91,7 +60,7 @@ public class SyncQueueRepository : ISyncQueueRepository
 
     public async Task DeleteSyncedAsync(DateTime olderThan, CancellationToken cancellationToken = default)
     {
-        await _context.SyncQueue
+        await DbSet
             .Where(x => x.Status == SyncStatus.Synced && x.SyncedAt < olderThan)
             .ExecuteDeleteAsync(cancellationToken);
     }

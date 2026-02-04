@@ -2,7 +2,7 @@ using MiniMarket.Domain.Common;
 
 namespace MiniMarket.Domain.Entities;
 
-public class AuditLog : BaseEntity
+public class AuditLog : AggregateRoot<Guid>
 {
     public string EntityType { get; private set; } = string.Empty;
     public Guid EntityId { get; private set; }
@@ -15,7 +15,7 @@ public class AuditLog : BaseEntity
     public string? IpAddress { get; private set; }
     public string? UserAgent { get; private set; }
 
-    private AuditLog() { }
+    private AuditLog() : base() { }
 
     public static AuditLog Create(
         string entityType,
@@ -39,8 +39,7 @@ public class AuditLog : BaseEntity
             UserId = userId,
             UserName = userName,
             IpAddress = ipAddress,
-            UserAgent = userAgent,
-            CreatedAt = DateTime.UtcNow
+            UserAgent = userAgent
         };
     }
 }

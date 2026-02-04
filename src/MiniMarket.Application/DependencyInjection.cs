@@ -33,8 +33,8 @@ public static class DependencyInjection
         // Fase 5 - Pulido y Produccion
         services.AddScoped<IAlertService, AlertService>();
         services.AddScoped<IAuditService, AuditService>();
-        services.AddScoped<IBackupService, BackupService>();
         services.AddScoped<IAuthService, AuthService>();
+        // IBackupService is registered in Infrastructure
 
         return services;
     }

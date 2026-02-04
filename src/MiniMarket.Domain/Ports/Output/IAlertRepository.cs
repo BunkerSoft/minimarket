@@ -3,7 +3,7 @@ using MiniMarket.Domain.Enums;
 
 namespace MiniMarket.Domain.Ports.Output;
 
-public interface IAlertRepository : IRepository<Alert>
+public interface IAlertRepository : IRepository<Alert, Guid>
 {
     Task<IReadOnlyList<Alert>> GetActiveAsync();
     Task<IReadOnlyList<Alert>> GetByTypeAsync(AlertType type);

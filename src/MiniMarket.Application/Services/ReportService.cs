@@ -142,7 +142,7 @@ public class ReportService : IReportService
         // Payment methods
         var paymentMethods = completedSales
             .SelectMany(s => s.Payments)
-            .GroupBy(p => p.PaymentMethod)
+            .GroupBy(p => p.Method)
             .Select(g => new PaymentMethodSummaryDto(
                 g.Key.ToString(),
                 g.Sum(p => p.Amount.Amount),
