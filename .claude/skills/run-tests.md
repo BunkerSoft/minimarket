@@ -14,7 +14,7 @@ run-tests
 </command-name>
 
 <prompt>
-Ejecuta las pruebas unitarias del proyecto MiniMarket y verifica la cobertura de código.
+Ejecuta las pruebas unitarias del proyecto MerkaCentro y verifica la cobertura de código.
 
 ## Pasos:
 

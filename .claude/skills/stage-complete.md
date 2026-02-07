@@ -14,7 +14,7 @@ stage-complete
 </command-name>
 
 <prompt>
-Ejecuta el flujo completo de verificación y cierre de etapa para el proyecto MiniMarket.
+Ejecuta el flujo completo de verificación y cierre de etapa para el proyecto MerkaCentro.
 
 ## Flujo de Cierre de Etapa
 

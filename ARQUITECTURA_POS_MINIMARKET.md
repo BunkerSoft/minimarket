@@ -1,10 +1,10 @@
-# Arquitectura del Sistema POS MiniMarket
+# Arquitectura del Sistema POS MerkaCentro
 
 ## Información General
 
 | Aspecto | Descripción |
 |---------|-------------|
-| **Nombre del Proyecto** | POS MiniMarket |
+| **Nombre del Proyecto** | POS MerkaCentro |
 | **Tipo** | Sistema de Punto de Venta para Minimarket |
 | **Arquitectura** | Hexagonal |
 | **Framework** | .NET 8 MVC |
@@ -70,11 +70,11 @@
 ## Estructura de la Solución
 
 ```
-MiniMarket.sln
-├── MiniMarket.Domain           (Entidades, Value Objects, Puertos)
-├── MiniMarket.Application      (Casos de uso, DTOs)
-├── MiniMarket.Infrastructure   (Adaptadores: BD, Hardware, Sync)
-└── MiniMarket.Web              (MVC: Controllers, Views, ViewModels)
+MerkaCentro.sln
+├── MerkaCentro.Domain           (Entidades, Value Objects, Puertos)
+├── MerkaCentro.Application      (Casos de uso, DTOs)
+├── MerkaCentro.Infrastructure   (Adaptadores: BD, Hardware, Sync)
+└── MerkaCentro.Web              (MVC: Controllers, Views, ViewModels)
 ```
 
 ---

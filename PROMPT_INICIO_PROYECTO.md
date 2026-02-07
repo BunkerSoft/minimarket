@@ -1,4 +1,4 @@
-# Prompt para Iniciar Proyecto POS MiniMarket
+# Prompt para Iniciar Proyecto POS MerkaCentro
 
 
 
@@ -10,7 +10,7 @@ Actúa como un arquitecto de software senior y desarrollador .NET experto. Neces
 
 ## CONTEXTO DEL PROYECTO
 
-**Nombre:** POS MiniMarket
+**Nombre:** POS MerkaCentro
 **Tipo:** Sistema de Punto de Venta para minimarket de alimentos y varios
 **Framework:** .NET 8 MVC
 **Arquitectura:** Hexagonal
@@ -21,16 +21,16 @@ Actúa como un arquitecto de software senior y desarrollador .NET experto. Neces
 Crea la siguiente estructura de proyectos:
 
 ```
-MiniMarket.sln
+MerkaCentro.sln
 ├── src/
-│   ├── MiniMarket.Domain/           (Entidades, Value Objects, Puertos)
-│   ├── MiniMarket.Application/      (Casos de uso, DTOs, Mappers)
-│   ├── MiniMarket.Infrastructure/   (Adaptadores: BD, Hardware, Sync)
-│   └── MiniMarket.Web/              (MVC: Controllers, Views, ViewModels)
+│   ├── MerkaCentro.Domain/           (Entidades, Value Objects, Puertos)
+│   ├── MerkaCentro.Application/      (Casos de uso, DTOs, Mappers)
+│   ├── MerkaCentro.Infrastructure/   (Adaptadores: BD, Hardware, Sync)
+│   └── MerkaCentro.Web/              (MVC: Controllers, Views, ViewModels)
 ├── tests/
-│   ├── MiniMarket.Domain.Tests/
-│   ├── MiniMarket.Application.Tests/
-│   └── MiniMarket.Infrastructure.Tests/
+│   ├── MerkaCentro.Domain.Tests/
+│   ├── MerkaCentro.Application.Tests/
+│   └── MerkaCentro.Infrastructure.Tests/
 └── docs/
 ```
 
@@ -189,7 +189,7 @@ Puedes usar prompts específicos como:
 
 **Para implementar un módulo específico:**
 ```
-Continúa con el proyecto POS MiniMarket. Implementa el módulo de [NOMBRE_MÓDULO] siguiendo la arquitectura hexagonal establecida.
+Continúa con el proyecto POS MerkaCentro. Implementa el módulo de [NOMBRE_MÓDULO] siguiendo la arquitectura hexagonal establecida.
 ```
 
 **Para implementar una vista:**

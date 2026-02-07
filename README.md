@@ -1,4 +1,4 @@
-# MiniMarket POS
+# MerkaCentro POS
 
 Sistema de Punto de Venta (POS) completo para minimarket desarrollado con .NET 8 MVC y arquitectura hexagonal.
 
@@ -17,16 +17,16 @@ Sistema de Punto de Venta (POS) completo para minimarket desarrollado con .NET 8
 El proyecto sigue una arquitectura hexagonal (Clean Architecture):
 
 ```
-MiniMarket.sln
+MerkaCentro.sln
 ├── src/
-│   ├── MiniMarket.Domain/        # Entidades, Value Objects, Puertos
-│   ├── MiniMarket.Application/   # Casos de uso, DTOs, Servicios
-│   ├── MiniMarket.Infrastructure/# Repositorios, DbContext, Servicios externos
-│   └── MiniMarket.Web/           # Controllers, Views, UI
+│   ├── MerkaCentro.Domain/        # Entidades, Value Objects, Puertos
+│   ├── MerkaCentro.Application/   # Casos de uso, DTOs, Servicios
+│   ├── MerkaCentro.Infrastructure/# Repositorios, DbContext, Servicios externos
+│   └── MerkaCentro.Web/           # Controllers, Views, UI
 └── tests/
-    ├── MiniMarket.Domain.Tests/
-    ├── MiniMarket.Application.Tests/
-    └── MiniMarket.Infrastructure.Tests/
+    ├── MerkaCentro.Domain.Tests/
+    ├── MerkaCentro.Application.Tests/
+    └── MerkaCentro.Infrastructure.Tests/
 ```
 
 ## Requisitos Previos
@@ -52,18 +52,18 @@ cd minimarket
 ```bash
 # Iniciar SQL Server en Docker
 docker run -e 'ACCEPT_EULA=Y' \
-  -e 'MSSQL_SA_PASSWORD=MiniMarket123!' \
+  -e 'MSSQL_SA_PASSWORD=MerkaCentro123!' \
   -p 1433:1433 \
   --name minimarket-db \
   -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-Luego, actualiza la cadena de conexion en `src/MiniMarket.Web/appsettings.json`:
+Luego, actualiza la cadena de conexion en `src/MerkaCentro.Web/appsettings.json`:
 
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost,1433;Database=MiniMarketDb;User Id=sa;Password=MiniMarket123!;TrustServerCertificate=True"
+    "DefaultConnection": "Server=localhost,1433;Database=MerkaCentroDb;User Id=sa;Password=MerkaCentro123!;TrustServerCertificate=True"
   }
 }
 ```
@@ -81,13 +81,13 @@ dotnet restore
 ### 4. Aplicar migraciones
 
 ```bash
-dotnet ef database update --project src/MiniMarket.Infrastructure --startup-project src/MiniMarket.Web
+dotnet ef database update --project src/MerkaCentro.Infrastructure --startup-project src/MerkaCentro.Web
 ```
 
 ### 5. Ejecutar la aplicacion
 
 ```bash
-dotnet run --project src/MiniMarket.Web
+dotnet run --project src/MerkaCentro.Web
 ```
 
 La aplicacion estara disponible en: `http://localhost:5095`
@@ -148,13 +148,13 @@ dotnet build
 dotnet test
 
 # Ejecutar con hot reload
-dotnet watch run --project src/MiniMarket.Web
+dotnet watch run --project src/MerkaCentro.Web
 
 # Crear nueva migracion
-dotnet ef migrations add NombreMigracion --project src/MiniMarket.Infrastructure --startup-project src/MiniMarket.Web
+dotnet ef migrations add NombreMigracion --project src/MerkaCentro.Infrastructure --startup-project src/MerkaCentro.Web
 
 # Revertir ultima migracion
-dotnet ef migrations remove --project src/MiniMarket.Infrastructure --startup-project src/MiniMarket.Web
+dotnet ef migrations remove --project src/MerkaCentro.Infrastructure --startup-project src/MerkaCentro.Web
 ```
 
 ## Configuracion Adicional
